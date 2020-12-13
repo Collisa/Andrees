@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% import 'macros/navbar.html' as nav %}
+
+
+{% block title %}Home{% endblock title %}
+
+
+
+{% block body %}
+  {{ nav.navbar(href='thema', button_text="Thema's") }}
+
+
+  {% block content %}
+    
+  {% endblock content %}
+
+  
+{% endblock body %}

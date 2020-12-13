@@ -1,0 +1,24 @@
+{% macro thema_box(cover, thema, pic_1, pic_2, pic_3, pic_4, href='#') %}
+
+  <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
+    <div class="flex-shrink-0 relative">
+      <img class="h-64 w-full object-cover" src="{{ cover }}" alt="">
+      <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
+        <div class="flex-1">
+          <p class="text-lg font-bold text-teal-800">
+            <a href="{{ href }}" class="hover:underline">
+              {{ thema }}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-row w-full h-16">
+      <img class="w-1/4 object-cover" src="{{ pic_1 }}" alt="">
+      <img class="w-1/4 object-cover" src="{{ pic_2 }}" alt="">
+      <img class="w-1/4 object-cover" src="{{ pic_3 }}" alt="">
+      <img class="w-1/4 object-cover" src="{{ pic_4 }}" alt="">
+    </div>
+  </div>
+  
+{% endmacro %}

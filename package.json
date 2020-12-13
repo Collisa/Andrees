@@ -1,0 +1,19 @@
+{
+  "name": "andres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev postcss static/css/tailwind-build.css -o static/css/tailwind.css",
+    "prod": "cross-env NODE_ENV=production postcss static/css/tailwind-build.css -o static/css/tailwind.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.2.1",
+    "postcss-import": "^13.0.0",
+    "tailwindcss": "^2.0.2"
+  }
+}
