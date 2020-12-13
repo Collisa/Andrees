@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% import 'macros/navbar.html' as nav %}
+{% from 'macros/del.html' import del as del %}
 
 
 {% block title %}Upload{% endblock title %}
@@ -52,15 +53,40 @@
 
 
 
-      <table>
-        <thead>
-          <th>Thumbnail</th>
-          <th>Naam</th>
-          <th>Thema</th>
-          <th>Plaats</th>
-          <th>Del</th>
+      <table class="table-auto w-11/12 mx-auto mt-6 rounded-lg overflow-hidden shadow-xl">
+        <thead class="bg-teal-700 text-white uppercase tracking-wider">
+          <th class="py-2 font-semibold">Thumbnail</th>
+          <th class="py-2 font-semibold">Naam</th>
+          <th class="py-2 font-semibold">Thema</th>
+          <th class="py-2 font-semibold">Plaats</th>
+          <th class="py-2 font-semibold">Verwijder</th>
         </thead>
-        <tbody></tbody>
+        <tbody class="text-center text-gray-700">
+          {% for img in all_img %}
+          <tr class="odd:bg-teal-50">
+
+         
+
+            <td><img class="w-16 h-12 object-cover" src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], img.filename)|resize('128x96', format='jpg', fill=1) }}" alt=""></td>
+
+
+            <td class="py-2">{{ img.filename }}</td>
+            <td>{{ img.theme }}</td>
+
+            {% if img.position == 'Thema: Cover' %}
+              <td>cover</td>
+            {% elif img.position == 'Thema: kleine foto' %}
+              <td>klein</td>
+            {% elif img.position == 'Geen geschikt formaat' %}
+              <td>/</td>  
+            {% endif %}
+
+
+            
+            <td class=""><a class="flex justify-center items-center" href="{{ url_for('delete', id=img.id) }}">{{ del() }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
 
 

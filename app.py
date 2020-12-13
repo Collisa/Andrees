@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import flask_resize   
 # from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
@@ -7,6 +8,11 @@ app = Flask(__name__)
 # csrf.init_app(app)
 
 from config import *
+
+
+
+resize = flask_resize.Resize(app)
+
 
 
 db = SQLAlchemy(app)

@@ -24,6 +24,7 @@ module.exports = {
       ringWidth: ['hover', 'active'],
       zIndex: ['hover', 'active'],
       borderWidth: ['hover', 'focus'],
+      backgroundColor: ['odd'],
     },
   },
   plugins: [],

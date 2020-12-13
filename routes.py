@@ -1,5 +1,5 @@
 from flask.helpers import url_for
-from app import app, db
+from app import app, db, resize
 from flask import render_template, request
 from werkzeug.utils import redirect, secure_filename
 
@@ -19,10 +19,13 @@ def thema():
 @app.route('/upload')
 def upload():
   form = UploadForm()
-  return render_template('upload.html', form=form)
+  
+  all_img = Image.query.all()
+  
+  return render_template('upload.html', form=form, all_img=all_img, app=app, os=os)
 
 
-@app.route('/uploading', methods=['POST'])
+@app.route('/loading', methods=['POST'])
 def uploading():
   file = request.files['image']
   filename = secure_filename(file.filename)
@@ -39,4 +42,12 @@ def uploading():
   db.session.commit()
   
   return redirect(url_for('upload'))
- 
+
+@app.route('/delete/<int:id>')
+def delete(id):
+  item = Image.query.get(id)
+  os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], item.filename))
+  db.session.delete(item)
+  db.session.commit()
+  
+  return redirect(url_for('upload'))

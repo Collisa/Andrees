@@ -5,4 +5,4 @@ __pycache__
 run.ps1
 config.py
 app.db
-/uploads
+/static/uploads
