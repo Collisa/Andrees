@@ -8,21 +8,47 @@ from models import Image
 
 import os
 
+
+
+
+all_img = Image.query.all()
+
+
 @app.route('/')
 def home():
-  return render_template('home.html')
+  return render_template('home.html', all_img=all_img, app=app, os=os)
+
+
 
 @app.route('/thema')
 def thema():
-  return render_template('thema.html')
+  small_img_all = Image.query.filter(Image.position == 'Thema: kleine foto')
+  covers = Image.query.filter(Image.position == 'Thema: Cover')
+  
+  cover = {}
+  
+  for foto in covers:
+    if not foto.theme in covers:
+      cover[foto.theme] = []
+    cover[foto.theme].append(foto.filename)
+  
+  thumbnails = {}
+  
+  for foto in small_img_all:
+    if not foto.theme in thumbnails:
+      thumbnails[foto.theme] = []
+    thumbnails[foto.theme].append(foto.filename)
+  
+  return render_template('thema.html', thumbnails=thumbnails, os=os, app=app, covers=cover)
+
+
 
 @app.route('/upload')
 def upload():
   form = UploadForm()
   
-  all_img = Image.query.all()
-  
   return render_template('upload.html', form=form, all_img=all_img, app=app, os=os)
+
 
 
 @app.route('/loading', methods=['POST'])
@@ -42,6 +68,8 @@ def uploading():
   db.session.commit()
   
   return redirect(url_for('upload'))
+
+
 
 @app.route('/delete/<int:id>')
 def delete(id):

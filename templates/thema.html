@@ -30,190 +30,71 @@
           <div class="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 
 
-            {{ thema_box(cover='static/src/101535986_10222600480699846_4444542783373443072_o.jpg', 
+            {{ thema_box(covers=covers['Libellen'], 
                           thema='Libellen',
-                          pic_1='static/src/117712087_10223255212107722_8894285617077797282_n.jpg',
-                          pic_2='static/src/117545768_10223255211707712_999238033129092876_n.jpg',
-                          pic_3='static/src/102749292_10222610825878469_7090167072054837248_o.jpg',
-                          pic_4='static/src/102747911_10222600480339837_5395397338107740160_o.jpg') }}
+                          thumbnails=thumbnails['Libellen'],
+                          os=os,
+                          app=app,
+            ) }}
 
-    
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="flex-shrink-0 relative">
-                <img class="h-64 w-full object-cover" src="static/src/82488407_10222610825478459_8726469622359916544_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Dieren
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/17016105_10211984404064565_2400319881595853132_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/83097519_10221107057765206_2891201280192020480_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/83152910_10221107058245218_125627694623752192_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/90819820_10221834325266439_8231745275975172096_o.jpg" alt="">
-              </div>
-            </div>
-    
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="flex-shrink-0 relative ">
-                <img class="h-64 w-full object-cover" src="static/src/94977129_10222244506080703_7410627393896841216_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Bloemen
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/95339153_10222244469679793_2676418066027380736_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/95387957_10222244468279758_7980686012114272256_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/95560805_10222244469359785_96752668147449856_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/101924099_10222600481819874_5874899998272913408_o.jpg" alt="">
-              </div>
-            </div>
-          </div>
-      
+            {{ thema_box(covers=covers['Dieren'], 
+                          thema='Beestjes',
+                          thumbnails=thumbnails['Dieren'],
+                          os=os,
+                          app=app,
+            ) }}
 
+            {{ thema_box(covers=covers['Bloemen'], 
+                          thema='Bloemen',
+                          thumbnails=thumbnails['Bloemen'],
+                          os=os,
+                          app=app,
+            ) }}
 
-          <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full object-cover" src="static/src/95202986_10222244484680168_4722567342272282624_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Vlinders
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/95337192_10222244486120204_1850965655709286400_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/95338885_10222244466919724_132963623319371776_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/95369300_10222244486600216_2647141107921584128_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/95386359_10222244470519814_4686046737138188288_o.jpg" alt="">
-              </div>
-            </div>
+            {{ thema_box(covers=covers['Vlinders'], 
+                          thema='Vlinders',
+                          thumbnails=thumbnails['Vlinders'],
+                          os=os,
+                          app=app,
+            ) }}
+
+            {{ thema_box(covers=covers['Winter'], 
+                          thema='Winter',
+                          thumbnails=thumbnails['Winter'],
+                          os=os,
+                          app=app,
+            ) }}
+
+            {{ thema_box(covers=covers['Katten'], 
+                          thema='Katten',
+                          thumbnails=thumbnails['Katten'],
+                          os=os,
+                          app=app,
+            ) }}
+
+            {{ thema_box(covers=covers['Vogels'], 
+                          thema='Vogels',
+                          thumbnails=thumbnails['Vogels'],
+                          os=os,
+                          app=app,
+            ) }}
+
+            {{ thema_box(covers=covers['Natuur'], 
+                          thema='Natuur',
+                          thumbnails=thumbnails['Natuur'],
+                          os=os,
+                          app=app,
+            ) }}
+
+            {{ thema_box(covers=covers['Coloured skies'], 
+                          thema='Coloured skies',
+                          thumbnails=thumbnails['Coloured skies'],
+                          os=os,
+                          app=app,
+            ) }}
+
+          
     
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full object-cover" src="static/src/15732381_10211445998764769_656163145797626954_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Winter
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/15774900_10211445999924798_5069652904800513939_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/15844349_10211446013445136_1780911614515477729_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/15874860_10211445998084752_2785765830101427020_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/15774900_10211445999924798_5069652904800513939_o.jpg" alt="">
-              </div>
-            </div>
-    
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full obj-cover" src="static/src/22041956_10214165945121728_178483210104774942_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Katten
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/92948466_10222015136746613_8589605996937084928_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/392036_2823194938135_1004300297_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/10371658_10152151619908873_7391142319087772354_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/10411934_10152151619283873_7546943405689036052_n.jpg" alt="">
-              </div>
-            </div>
-          </div>
-    
-    
-      
-        
-          <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full object-cover" src="static/src/16252077_10211668253841007_231049582184131569_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Vogels
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/102404499_10222610823638413_8805384187520483328_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/102870443_10222610825678464_1382851861538668544_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/1933223_10208229884803930_7020578294264620647_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/13015241_10209063335359673_495996723671193884_n.jpg" alt="">
-              </div>
-            </div>
-    
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full object-cover" src="static/src/95542069_10222244468479763_7587513246865686528_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Natuur
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/117387739_10223220832968265_3468547339976388620_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/15774993_10211445980244306_3764423929787133665_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/127177585_10224499220167146_6018642958639345877_n.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/16143643_10211668258921134_3712551804122621154_o.jpg" alt="">
-              </div>
-            </div>
-    
-            <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden ring-teal-300 hover:ring-4">
-              <div class="relative flex-shrink-0">
-                <img class="h-64 w-full object-cover" src="static/src/123843289_10224362020137231_6824383903155174939_o.jpg" alt="">
-                <div class="absolute flex-1 w-full bg-white flex flex-col justify-between opacity-80 text-center bottom-0 tracking-widest uppercase">
-                  <div class="flex-1">
-                    <p class="text-lg font-bold text-teal-800">
-                      <a href="#" class="hover:underline">
-                        Coloured skies
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-row w-full h-16">
-                <img class="w-1/4 object-cover" src="static/src/12091457_10207610734085549_3474946526042839699_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/13131589_10209185072963037_450170858554008808_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/13708255_10209779701508379_298976846197253860_o.jpg" alt="">
-                <img class="w-1/4 object-cover" src="static/src/81534868_10221072577783228_3848670569893462016_o.jpg" alt="">
-              </div>
-            </div>
           </div>
         </div>
       </div>
