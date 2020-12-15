@@ -11,19 +11,20 @@ import os
 
 
 
-all_img = Image.query.all()
+
 
 
 @app.route('/')
 def home():
+  all_img = Image.query.order_by(Image.id.desc())
   return render_template('home.html', all_img=all_img, app=app, os=os)
 
 
 
 @app.route('/thema')
 def thema():
-  small_img_all = Image.query.filter(Image.position == 'Thema: kleine foto')
-  covers = Image.query.filter(Image.position == 'Thema: Cover')
+  small_img_all = Image.query.filter(Image.position == 'Thema: kleine foto').order_by(Image.id.desc())
+  covers = Image.query.filter(Image.position == 'Thema: Cover').order_by(Image.id.desc())
   
   cover = {}
   
@@ -46,7 +47,7 @@ def thema():
 @app.route('/upload')
 def upload():
   form = UploadForm()
-  
+  all_img = Image.query.order_by(Image.id.desc())
   return render_template('upload.html', form=form, all_img=all_img, app=app, os=os)
 
 
