@@ -9,6 +9,7 @@ class Image(db.Model):
   description = db.Column(db.Text)
   theme = db.Column(db.String, nullable=False)
   position = db.Column(db.String)
+  theme_id = db.Column(db.Integer, db.ForeignKey('themes.id'), nullable=False)
   
 
 class Theme(db.Model):
@@ -18,3 +19,4 @@ class Theme(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   theme_name = db.Column(db.String, unique=True, nullable=False)
   permalink = db.Column(db.String, unique=True, nullable=False)
+  images = db.relationship('Image', backref='themes', lazy=True)

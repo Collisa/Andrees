@@ -1,6 +1,6 @@
 {% import 'macros/nav-button.html' as button %}
 
-{% macro navbar(href, button_text, href_2, button_text_2, bg_color='bg-transparent') %}
+{% macro navbar(href, button_text, href_2, button_text_2, logout, logout_button, bg_color='bg-transparent') %}
   
   <nav class="fixed w-full z-20 {{ bg_color }}">
     <div class="mx-3 my-3 text-white flex flex-row justify-between items-center">
@@ -18,6 +18,9 @@
         {{ button.nav_button(href, button_text) }}
         {% if href_2 and button_text_2 %}
           {{ button.nav_button(href_2, button_text_2) }}
+        {% endif %}
+        {% if logout and logout_button %}
+          {{ button.nav_button(logout, logout_button) }}
         {% endif %}
       </div>
     </div>

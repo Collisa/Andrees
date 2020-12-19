@@ -1,10 +1,10 @@
-from flask.helpers import url_for
-from app import app, db, resize
-from flask import render_template, request
-from werkzeug.utils import redirect, secure_filename
+from app import app, db
+from flask import render_template, request, flash, session, g, url_for, redirect
+from werkzeug.utils import secure_filename
 
-from forms import UploadForm
-from models import Image
+from forms import UploadForm, NewThemeForm
+from models import Image, Theme
+from user import users
 
 import os
 
@@ -44,16 +44,77 @@ def thema():
 
 
 
-@app.route('/upload')
+
+
+
+
+@app.before_request
+def before_request():
+  g.user = None
+  
+  if 'user_id' in session:
+    user = [x for x in users if x.id == session['user_id']][0]
+    g.user = user
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    session.pop('user_id', None)
+    
+    username = request.form['username']
+    password = request.form['password']
+    
+    user = [x for x in users if x.username == username][0]
+    if user and user.password == password:
+      session['user_id'] = user.id
+      return  redirect(url_for('upload'))
+    
+    return redirect(url_for('login'))
+      
+  return render_template('login.html')    
+
+
+@app.route('/logout')
+def logout():
+  session.pop('user_id', None)
+  return redirect(url_for('home'))
+
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
+  if not g.user:
+    return redirect(url_for('login'))
+  
   form = UploadForm()
+  theme_form = NewThemeForm()
+  
+  if theme_form.validate_on_submit():   
+    new_theme = Theme(
+      theme_name=request.form['theme_name'],
+      permalink=request.form['permalink']
+    )
+    
+    if Theme.query.filter(Theme.theme_name == new_theme.theme_name).first() and Theme.query.filter(Theme.permalink == new_theme.permalink).first():
+      flash("Ben je zeker dat dit thema nog niet bestaat?")
+      
+    else:
+      db.session.add(new_theme)
+      db.session.commit()
+      flash("Het thema is toegevoegd!")
+      
+    
+  
   all_img = Image.query.order_by(Image.id.desc())
-  return render_template('upload.html', form=form, all_img=all_img, app=app, os=os)
+  return render_template('upload.html', form=form, all_img=all_img, app=app, os=os, theme_form=theme_form)
 
 
 
 @app.route('/loading', methods=['POST'])
 def uploading():
+  if not g.user:
+    return redirect(url_for('login'))
+  
   file = request.files['image']
   filename = secure_filename(file.filename)
   file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
@@ -74,6 +135,9 @@ def uploading():
 
 @app.route('/delete/<int:id>')
 def delete(id):
+  if not g.user:
+    return redirect(url_for('login'))
+  
   item = Image.query.get(id)
   os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], item.filename))
   db.session.delete(item)

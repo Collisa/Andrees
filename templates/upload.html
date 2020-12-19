@@ -9,7 +9,7 @@
 
 {% block body %}
 
-  {{ nav.navbar(href='home', button_text='Home', href_2='thema', button_text_2="Thema's", bg_color='bg-teal-800') }}
+  {{ nav.navbar(href='home', button_text='Home', href_2='thema', button_text_2="Thema's", logout='logout', logout_button='Log uit', bg_color='bg-teal-800') }}
 
 
     {% block content %}
@@ -20,35 +20,92 @@
             Upload je foto's hier:
           </h2>
 
-          <form action="{{ url_for('uploading') }}" method="POST" enctype=multipart/form-data>
-            <div class="w-2/3 mt-7 bg-gray-300 mx-auto flex items-center justify-center flex-col space-y-12 pb-8">
+          
+          <div class="w-2/3 mt-7 bg-gray-300 mx-auto flex items-center justify-center flex-col pb-8">
+            <div class="w-full flex flex-row items-center justify-center">
+              <form class="w-full flex flex-col items-center" action="{{ url_for('uploading') }}" method="POST" enctype=multipart/form-data>
               {{ form.csrf_token }}
-
+  
               
-              {{ form.image(class="w-full py-12 border-dashed border-4 border-gray-600") }}
+              <!-- {{ form.image(class="w-full py-12 border-dashed border-4 border-gray-600") }} -->
+              <input class="w-full py-12 border-dashed border-4 border-gray-600" type="file" id="image" name="image" accept="image/png, image/jpeg, image/jpeg">
               
-              <div class="flex flex-row space-x-8">
-                <div class="flex flex-col">
-                  {{ form.description.label }}
-                  {{ form.description }}
-                </div>
-                <div class="text-left">
-                  <div>
-                    {{ form.theme.label }}
-                    {{ form.theme }}
+              <div class="w-full flex flex-row items-center pt-12">
+                
+                <div class="w-2/3">
+                  <div class="flex flex-row space-x-8 w-full justify-center">
+                    <div class="flex flex-col">
+                      {{ form.description.label }}
+                      {{ form.description }}
+                    </div>
+                    <div class="text-left">
+                      <div>
+                        {{ form.theme.label }}
+                        {{ form.theme }}
+                      </div>
+                      {{ form.position }}
+                    </div>
+                    
                   </div>
-                  {{ form.position }}
+                  {{ form.submit(class="mt-2 px-2 py-1 rounded bg-teal-100 hover:bg-teal-500 hover:text-white") }}
                 </div>
-              </div>
-              {{ form.submit(class="p-2 rounded bg-teal-100 hover:bg-teal-500 hover:text-white") }}
+                
+              </form>
+            
+              <form action="{{url_for('upload')}}" method="POST">
+                {{ theme_form.csrf_token }}
+                <div class="bg-gray-200 rounded-xl flex flex-col space-y-3 mx-10 p-4">
+                  Heb je een nieuw thema nodig? <br>
+                  <p>
+                    Maak <span class="font-bold inline">hier</span> je thema aan!
+                  </p>
+                  <div class="flex flex-row justify-between space-x-6">
+                    <div class="w-full text-right">
+                      {{ theme_form.theme_name.label }}
+                    </div>
+                    
+                    <div class="w-full text-left">
+                      {{ theme_form.theme_name(class="text-center") }}
+                    </div>
+                  </div>
 
-              
-              
+                  <div class="flex flex-row justify-between space-x-6">
+                    <div class="w-full text-right">
+                      {{ theme_form.permalink.label }}
+                    </div>
+                    
+                    <div class="w-full text-left">
+                      {{ theme_form.permalink(class="text-center") }}
+
+                      
+
+                      <!-- <input type="text" id="permalink" name="permalink" pattern="^[-a-z]*$" title=""> -->
+                    </div>
+                  </div>
+                  <button>{{ theme_form.submit(class="px-2 py-1 rounded bg-teal-100 hover:bg-teal-500 hover:text-white") }}</button>
+                  
+                  {% for error in theme_form.theme_name.errors %}
+                    <p class="text-teal-700 text-sm">{{ error }}</p>
+                  {% endfor %}
+
+                  {% for error in theme_form.permalink.errors %}
+                    <p class="text-teal-700 text-sm">{{ error }}</p>
+                  {% endfor %}
+
+                  {% for message in get_flashed_messages() %}
+                    <p class="text-teal-700 text-sm">
+                      {{ message }}
+                    </p>
+                  {% endfor %}
+
+                </div>
+              </form>
+            
             </div>
-          </form>
-
+          </div>
         </div>
       </div>
+      
       
 
 

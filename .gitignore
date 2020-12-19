@@ -6,3 +6,4 @@ run.ps1
 config.py
 app.db
 /static/uploads
+user.py
