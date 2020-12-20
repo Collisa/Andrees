@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% import 'macros/navbar.html' as nav %}
 {% from 'macros/del.html' import del as del %}
+{% from 'macros/edit.html' import edit as edit %}
 
 
 {% block title %}Upload{% endblock title %}
@@ -140,7 +141,12 @@
 
 
             
-            <td class=""><a class="flex justify-center items-center" href="{{ url_for('delete', id=img.id) }}">{{ del() }}</a></td>
+            <td class="">
+              <div class="flex flex-row justify-center items-center space-x-3">
+                <a class="" href="{{ url_for('edit', id=img.id) }}">{{ edit() }}</a>
+                <a class="" href="{{ url_for('delete', id=img.id) }}">{{ del() }}</a>
+              </div>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

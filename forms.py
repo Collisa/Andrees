@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, RadioField, StringField, SelectField, FileField, TextAreaField, validators
-from wtforms.validators import Regexp, InputRequired
+from wtforms.validators import Regexp, InputRequired, Required
 
 from models import Theme
 
@@ -18,3 +18,10 @@ class NewThemeForm(FlaskForm):
   theme_name = StringField('Naam', validators=[InputRequired()])
   permalink = StringField('Permalink', validators=[Regexp('^[-a-z]*$', message='Ben je zeker dat je enkel kleine letters en koppeltekens hebt gebruikt?')])
   submit = SubmitField('Voeg toe')
+  
+class EditForm(FlaskForm):
+  description = TextAreaField('Omschrijving')
+  theme = SelectField('Thema', choices=[theme.theme_name for theme in all_themes])
+  position = RadioField('Position', choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
+  submit = SubmitField('Wijzig')
+     

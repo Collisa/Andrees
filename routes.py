@@ -2,7 +2,7 @@ from app import app, db
 from flask import render_template, request, flash, session, g, url_for, redirect
 from werkzeug.utils import secure_filename
 
-from forms import UploadForm, NewThemeForm
+from forms import UploadForm, NewThemeForm, EditForm
 from models import Image, Theme
 from user import users
 
@@ -144,3 +144,38 @@ def delete(id):
   db.session.commit()
   
   return redirect(url_for('upload'))
+
+
+@app.route('/edit/<int:id>')
+def edit(id):
+  if not g.user:
+    return redirect(url_for('login'))
+  
+  item = Image.query.get(id)
+  
+  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(obj=item))
+
+
+
+@app.route('/edit/<int:id>', methods=['POST'])
+def update(id):
+  if not g.user:
+    return redirect(url_for('login'))
+  
+  item = Image.query.get(id)
+  
+  form = EditForm()
+  
+  if form.validate_on_submit():
+    print("hier")
+    item.description=form.description.data
+    item.theme=form.theme.data
+    item.position=form.position.data
+    db.session.commit()
+    return redirect(url_for('upload'))
+  
+  for error in form.errors:
+    for message in form.errors[error]:
+      flash(message)
+    
+  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(obj=item))
