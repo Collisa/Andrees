@@ -1,123 +1,48 @@
-{% extends 'base.html' %}
-{% import 'macros/navbar.html' as nav %}
-{% from 'macros/thema-box.html' import thema_box %}
+{% extends 'base.html' %} {% import 'macros/navbar.html' as nav %} {% from
+'macros/thema-box.html' import thema_box %} {% block title %}Thema's{% endblock
+title %} {% block body %} {{ nav.navbar(href='home', button_text='Home',
+bg_color='bg-teal-800') }} {% block content %}
 
+<div class="pt-16 px-4 sm:px-6 lg:pt-24 lg:px-8">
+  <div class="mx-auto">
+    <div class="text-center">
+      <h2
+        class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl"
+      >
+        Thema's
+      </h2>
+      <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+        Ben je op zoek naar een specifiek thema, scroll eens door de thema's en
+        misschien vind je wel wat je nodig hebt. <br />
+        <b>Hint:</b> André zijn passie is foto's trekken van vlinders!
+      </p>
+    </div>
+  </div>
+</div>
 
-{% block title %}Thema's{% endblock title %}
+<div class="w-full flex flex-row overflow-hidden mt-2">
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+  <img class="transform" src="static/src/UIHere (2).png" alt="" />
+</div>
 
-
-
-{% block body %}
-  {{ nav.navbar(href='home', button_text='Home', bg_color='bg-teal-800') }}
-
-
-  {% block content %}
-
-
-    <div class="pt-16 px-4 sm:px-6 lg:pt-24 lg:px-8">
-      
-      <div class="mx-auto">
-        <div class="text-center">
-          <h2 class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
-            Thema's
-          </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-            Ben je op zoek naar een specifiek thema, scroll eens door de thema's en misschien vind je wel wat je nodig hebt. <br>
-            <b>Hint:</b> André zijn passie is foto's trekken van vlinders!
-          </p>
-        </div>
-
-        <div class="w-full flex flex-row overflow-hidden mt-2">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-          <img class="transform" src="static/src/UIHere (2).png" alt="">
-        </div>
-
-        <div class="p-12">
-          <div class="max-w-lg mx-auto grid gap-x-5 gap-y-10 lg:grid-cols-3 lg:max-w-none">
-
-
-            {{ thema_box(covers=covers['Libellen'], 
-                          thema='Libellen',
-                          thumbnails=thumbnails['Libellen'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Dieren'], 
-                          thema='Beestjes',
-                          thumbnails=thumbnails['Dieren'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Bloemen'], 
-                          thema='Bloemen',
-                          thumbnails=thumbnails['Bloemen'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Vlinders'], 
-                          thema='Vlinders',
-                          thumbnails=thumbnails['Vlinders'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Winter'], 
-                          thema='Winter',
-                          thumbnails=thumbnails['Winter'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Katten'], 
-                          thema='Katten',
-                          thumbnails=thumbnails['Katten'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Vogels'], 
-                          thema='Vogels',
-                          thumbnails=thumbnails['Vogels'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Natuur'], 
-                          thema='Natuur',
-                          thumbnails=thumbnails['Natuur'],
-                          os=os,
-                          app=app,
-            ) }}
-
-            {{ thema_box(covers=covers['Coloured skies'], 
-                          thema='Coloured skies',
-                          thumbnails=thumbnails['Coloured skies'],
-                          os=os,
-                          app=app,
-            ) }}
-
-          
-    
-          </div>
-        </div>
+<div class="px-4 sm:px-6">
+  <div class="mx-auto">
+    <div class="p-12">
+      <div
+        class="max-w-lg mx-auto grid gap-x-5 gap-y-10 lg:grid-cols-3 lg:max-w-none"
+      >
+        {% for i in themes_id %} {{ thema_box(covers=covers[themes_name[i-1]],
+        thema=themes_name[i-1], thumbnails=thumbnails[themes_name[i-1]], os=os,
+        app=app, href=url_for('theme_link', theme_id=themes_id[i-1],
+        permalink=themes_permalink[i-1]) ) }} {% endfor %}
       </div>
     </div>
+  </div>
+</div>
 
-
-
-
-
-
-
-  {% endblock content %}
-
-  
-{% endblock body %}
+{% endblock content %} {% endblock body %}

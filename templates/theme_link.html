@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% import 'macros/navbar.html' as nav %} {% block
+title %}Thema{% endblock title %} {% block body %} {{ nav.navbar(href='home',
+button_text='Home', href_2='thema', button_text_2="Thema's",
+bg_color='bg-teal-800') }} {% block content %}
+
+<div class="w-full flex flex-row overflow-hidden pt-20 mb-4">
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+  <img class="" src="/static/src/UIHere (2).png" alt="" />
+</div>
+
+<section class="colcade-grid mx-2">
+  <div class="colcade-grid-col colcade-grid-col--1"></div>
+  <div class="colcade-grid-col colcade-grid-col--2"></div>
+  <div class="colcade-grid-col colcade-grid-col--3"></div>
+  <div class="colcade-grid-col colcade-grid-col--4"></div>
+
+  {% for img in all_img %}
+
+  <div class="colcade-grid-item">
+    <img
+      class="colcade-img rounded-2xl overflow-hidden relative hover:z-20 focus:outline-none focus:border-teal-500 hover:border-teal-500 border-4 border-transparent"
+      src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], img.filename)|resize('512', format='jpg') }}"
+      alt=""
+    />
+  </div>
+
+  {% endfor %}
+</section>
+
+<script src="https://unpkg.com/colcade@0/colcade.js"></script>
+
+<script>
+  var colc = new Colcade(".colcade-grid", {
+    columns: ".colcade-grid-col",
+    items: ".colcade-grid-item",
+  });
+</script>
+
+{% endblock content %} {% endblock body %}

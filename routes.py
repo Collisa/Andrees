@@ -40,7 +40,17 @@ def thema():
       thumbnails[foto.theme] = []
     thumbnails[foto.theme].append(foto.filename)
   
-  return render_template('thema.html', thumbnails=thumbnails, os=os, app=app, covers=cover)
+  themes_id = []
+  themes_permalink = []
+  themes_name = []
+    
+  for theme in Theme.query.all():
+    themes_id.append(theme.id)
+    themes_permalink.append(theme.permalink)
+    themes_name.append(theme.theme_name)
+    
+  
+  return render_template('thema.html', thumbnails=thumbnails, os=os, app=app, covers=cover, themes_id=themes_id, themes_permalink=themes_permalink, themes_name=themes_name)
 
 
 
@@ -92,7 +102,7 @@ def upload():
   if theme_form.validate_on_submit():   
     new_theme = Theme(
       theme_name=request.form['theme_name'],
-      permalink=request.form['permalink']
+      permalink=request.form['permalink'],
     )
     
     if Theme.query.filter(Theme.theme_name == new_theme.theme_name).first() and Theme.query.filter(Theme.permalink == new_theme.permalink).first():
@@ -171,6 +181,11 @@ def update(id):
     item.description=form.description.data
     item.theme=form.theme.data
     item.position=form.position.data
+    
+    new_theme = Theme.query.filter(Theme.theme_name == form.theme.data).first()
+    
+    item.theme_id=new_theme.id
+    
     db.session.commit()
     return redirect(url_for('upload'))
   
@@ -179,3 +194,9 @@ def update(id):
       flash(message)
     
   return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(obj=item))
+
+
+@app.route('/thema/<int:theme_id>/<permalink>')
+def theme_link(theme_id, permalink):
+  all_img = Image.query.filter(Image.theme_id == theme_id).order_by(Image.id.desc())
+  return render_template('theme_link.html', all_img=all_img, app=app, os=os)
