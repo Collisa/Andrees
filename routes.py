@@ -80,10 +80,10 @@ def login():
     username = request.form['username']
     password = request.form['password']
     
-    user = [x for x in users if x.username == username][0]
-    if user and user.password == password:
-      session['user_id'] = user.id
-      return  redirect(url_for('upload'))
+    for user in users:
+      if user.username == username and user.password == password:
+        session['user_id'] = user.id
+        return redirect(url_for('upload'))        
     
     return redirect(url_for('login'))
       
@@ -192,7 +192,6 @@ def update(id):
   form = EditForm()
   
   if form.validate_on_submit():
-    print("hier")
     item.description=form.description.data
     item.theme=form.theme.data
     item.position=form.position.data

@@ -12,4 +12,4 @@ class User:
 
 
 users = []
-users.append(User(id=1, username=environ.get('DEFAULT_USERNAME'), password=environ.get('DEFAULT_PASSWORD')))
+users.append(User(id=1, username=environ.get('DEFAULT_USER'), password=environ.get('DEFAULT_PASSWORD')))
