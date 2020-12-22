@@ -8,6 +8,8 @@ from user import users
 from os import environ
 
 import os
+import tempfile
+
 import boto3
 
 s3 = boto3.client('s3',
@@ -132,15 +134,16 @@ def uploading():
   
   file = request.files['image']
   filename = secure_filename(file.filename)
-  file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
+  
+  file.save(os.path.join(tempfile.gettempdir(), filename))
   
   s3.upload_file(
                     Bucket = BUCKET_NAME,
-                    Filename=os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename),
+                    Filename=os.path.join(tempfile.gettempdir(), filename),
                     Key = 'images/original/' + filename,
                     ExtraArgs={'ACL':'public-read', 'ContentType': 'image/jpeg'}                    
                 )
-  os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
+  os.remove(os.path.join(tempfile.gettempdir(), filename))
   
   new_file = Image(
     filename=filename,
