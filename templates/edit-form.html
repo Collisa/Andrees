@@ -27,7 +27,7 @@ body %} {% block content %}
     >
       <img
         class="mx-auto mb-12"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], item.filename)|resize('128x96', format='jpg', fill=1) }}"
+        src="{{ ('images/original/'+item.filename)|resize('128x96', format='jpg', fill=1) }}"
         alt=""
       />
       <div class="text-center">

@@ -103,7 +103,9 @@ def upload():
   if not g.user:
     return redirect(url_for('login'))
   
-  form = UploadForm()
+  all_themes = Theme.query.all()
+  
+  form = UploadForm(all_themes)
   theme_form = NewThemeForm()
   
   if theme_form.validate_on_submit():   
@@ -120,7 +122,8 @@ def upload():
       db.session.commit()
       flash("Het thema is toegevoegd!")
       
-    
+    return redirect(url_for('upload'))
+      
   
   all_img = Image.query.order_by(Image.id.desc())
   return render_template('upload.html', form=form, all_img=all_img, app=app, os=os, theme_form=theme_form)
@@ -179,9 +182,11 @@ def edit(id):
   if not g.user:
     return redirect(url_for('login'))
   
+  all_themes = Theme.query.all()
+  
   item = Image.query.get(id)
   
-  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(obj=item))
+  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(all_themes, obj=item))
 
 
 
@@ -192,7 +197,9 @@ def update(id):
   
   item = Image.query.get(id)
   
-  form = EditForm()
+  all_themes = Theme.query.all()
+  
+  form = EditForm(all_themes)
   
   if form.validate_on_submit():
     item.description=form.description.data
@@ -210,7 +217,7 @@ def update(id):
     for message in form.errors[error]:
       flash(message)
     
-  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(obj=item))
+  return render_template('edit-form.html', item=item, os=os, app=app, form=EditForm(all_themes, obj=item))
 
 
 @app.route('/thema/<int:theme_id>/<permalink>')

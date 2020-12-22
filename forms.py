@@ -4,12 +4,15 @@ from wtforms.validators import Regexp, InputRequired, Required
 
 from models import Theme
 
-all_themes = Theme.query.all()
 
 class UploadForm(FlaskForm):
+  def __init__(self, all_themes):
+      super(UploadForm, self).__init__()
+      self.theme.choices = [theme.theme_name for theme in all_themes]
+      
   image = FileField('', validators=[Regexp('^\\[^/\\]\.jpg$')]) # regexp doesn't work, everything is okay 
   description = TextAreaField('Omschrijving')
-  theme = SelectField('Thema', choices=[theme.theme_name for theme in all_themes])
+  theme = SelectField('Thema', choices=[])
   position = RadioField('Position', choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
   submit = SubmitField('Upload')
     
@@ -20,8 +23,12 @@ class NewThemeForm(FlaskForm):
   submit = SubmitField('Voeg toe')
   
 class EditForm(FlaskForm):
+  def __init__(self, all_themes, **kwargs):
+      super(EditForm, self).__init__(**kwargs)
+      self.theme.choices = [theme.theme_name for theme in all_themes]
+      
   description = TextAreaField('Omschrijving')
-  theme = SelectField('Thema', choices=[theme.theme_name for theme in all_themes])
+  theme = SelectField('Thema', choices=[])
   position = RadioField('Position', choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
   submit = SubmitField('Wijzig')
      
