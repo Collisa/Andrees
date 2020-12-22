@@ -2,6 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import flask_resize   
+
+from dotenv import load_dotenv
+load_dotenv()
+
 # from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
@@ -9,7 +13,6 @@ app = Flask(__name__)
 # csrf.init_app(app)
 
 from config import *
-
 
 
 resize = flask_resize.Resize(app)

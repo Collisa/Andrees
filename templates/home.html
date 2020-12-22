@@ -1,76 +1,60 @@
-{% extends 'base.html' %}
-{% import 'macros/navbar.html' as nav %}
+{% extends 'base.html' %} {% import 'macros/navbar.html' as nav %} {% block
+title %}Home{% endblock title %} {% block body %} {{ nav.navbar(href='thema',
+button_text="Thema's") }} {% block content %}
 
+<header
+  class="relative overflow-hidden flex items-center justify-center max-h-128"
+>
+  <img
+    class="object-cover w-full transform lg:translate-y-28"
+    src="static/src/header-img.jpg"
+    alt=""
+  />
 
-{% block title %}Home{% endblock title %}
+  <div class="absolute w-3/5 z-10 max-w-xl">
+    <h1 class="text-white text-2xl sm:text-4xl font-bold text-justify">
+      Deze website is een eerbetoon aan de mooiste foto's genomen door André
+      Collignon.
+    </h1>
+  </div>
+</header>
 
+<div class="w-full flex flex-row overflow-hidden mt-2 mb-4">
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+  <img class="" src="static/src/UIHere (2).png" alt="" />
+</div>
 
+<section class="colcade-grid mx-2">
+  <div class="colcade-grid-col colcade-grid-col--1"></div>
+  <div class="colcade-grid-col colcade-grid-col--2"></div>
+  <div class="colcade-grid-col colcade-grid-col--3"></div>
+  <div class="colcade-grid-col colcade-grid-col--4"></div>
 
-{% block body %}
-  {{ nav.navbar(href='thema', button_text="Thema's") }}
+  {% for img in all_img %}
 
-
-  {% block content %}
-    
-
-  <header class="relative overflow-hidden flex items-center justify-center max-h-128">
-    <img class="object-cover w-full transform lg:translate-y-28" src="static/src/header-img.jpg" alt="">
-
-    <div class="absolute w-3/5 z-10 max-w-xl">
-      <h1 class="text-white text-2xl sm:text-4xl font-bold text-justify">
-        Deze website is een eerbetoon aan de mooiste foto's genomen door André Collignon.
-      </h1>
-    </div>
-  </header>
-
-
-  <div class="w-full flex flex-row overflow-hidden mt-2 mb-4">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
-    <img class="" src="static/src/UIHere (2).png" alt="">
+  <div class="colcade-grid-item">
+    <img
+      class="colcade-img rounded-2xl overflow-hidden relative hover:z-20 focus:outline-none focus:border-teal-500 hover:border-teal-500 border-4 border-transparent"
+      src="{{ ('images/original/'+img.filename)|resize('512', format='jpg') }}"
+      alt=""
+    />
   </div>
 
+  {% endfor %}
+</section>
 
-  <section class="colcade-grid mx-2">
-    <div class="colcade-grid-col colcade-grid-col--1">
+<script src="https://unpkg.com/colcade@0/colcade.js"></script>
 
-    </div>
-    <div class="colcade-grid-col colcade-grid-col--2">
+<script>
+  var colc = new Colcade(".colcade-grid", {
+    columns: ".colcade-grid-col",
+    items: ".colcade-grid-item",
+  });
+</script>
 
-    </div>
-    <div class="colcade-grid-col colcade-grid-col--3">
-
-    </div>
-    <div class="colcade-grid-col colcade-grid-col--4">
-
-    </div>
-
-
-    {% for img in all_img %}
-      
-      <div class="colcade-grid-item">
-        <img class="colcade-img rounded-2xl overflow-hidden relative hover:z-20 focus:outline-none focus:border-teal-500 hover:border-teal-500 border-4 border-transparent" src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], img.filename)|resize('512', format='jpg') }}" alt="">
-      </div>
-
-    {% endfor %}
-
-  </section>
-
-
-  <script src="https://unpkg.com/colcade@0/colcade.js"></script>
-
-  <script>
-    var colc = new Colcade( '.colcade-grid', {
-      columns: '.colcade-grid-col',
-      items: '.colcade-grid-item'
-    });
-  </script>
-
-  {% endblock content %}
-
-  
-{% endblock body %}
+{% endblock content %} {% endblock body %}

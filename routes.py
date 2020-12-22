@@ -5,13 +5,18 @@ from werkzeug.utils import secure_filename
 from forms import UploadForm, NewThemeForm, EditForm
 from models import Image, Theme
 from user import users
+from os import environ
 
 import os
+import boto3
 
+s3 = boto3.client('s3',
+  aws_access_key_id=environ.get('AWS_ACCESS_KEY'),
+  aws_secret_access_key=environ.get('AWS_SECRET_KEY')
+)
+BUCKET_NAME=environ.get('AWS_BUCKET')
 
-
-
-
+s3resource = boto3.resource('s3', aws_access_key_id=environ.get('AWS_ACCESS_KEY'), aws_secret_access_key=environ.get('AWS_SECRET_KEY'))
 
 
 @app.route('/')
@@ -129,6 +134,14 @@ def uploading():
   filename = secure_filename(file.filename)
   file.save(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
   
+  s3.upload_file(
+                    Bucket = BUCKET_NAME,
+                    Filename=os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename),
+                    Key = 'images/original/' + filename,
+                    ExtraArgs={'ACL':'public-read', 'ContentType': 'image/jpeg'}                    
+                )
+  os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], filename))
+  
   new_file = Image(
     filename=filename,
     description=request.form['description'],
@@ -149,7 +162,9 @@ def delete(id):
     return redirect(url_for('login'))
   
   item = Image.query.get(id)
-  os.remove(os.path.join(app.config['UPLOADED_PHOTOS_DEST'], item.filename))
+  
+  s3resource.Object(BUCKET_NAME, 'images/original/' + item.filename).delete()  
+  
   db.session.delete(item)
   db.session.commit()
   

@@ -123,9 +123,7 @@
           {% for img in all_img %}
           <tr class="odd:bg-teal-50">
 
-         
-
-            <td><img class="w-16 h-12 object-cover" src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], img.filename)|resize('128x96', format='jpg', fill=1) }}" alt=""></td>
+            <td><img class="w-16 h-12 object-cover" src="{{ ('images/original/'+img.filename)|resize('128x96', format='jpg', fill=1) }}" alt=""></td>
 
 
             <td class="py-2">{{ img.filename }}</td>

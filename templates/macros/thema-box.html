@@ -8,7 +8,7 @@
       {% if covers and covers[0] %}
       <img
         class="h-64 w-full object-cover"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], covers[0])|resize('512', format='jpg') }}"
+        src="{{ ('images/original/'+covers[0])|resize('512', format='jpg') }}"
         alt=""
       />
       {% else %}
@@ -33,7 +33,7 @@
       {% if thumbnails and thumbnails[0] %}
       <img
         class="w-1/4 object-cover"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], thumbnails[0])|resize('128x96', format='jpg') }}"
+        src="{{ ('images/original/'+thumbnails[0])|resize('128x96', format='jpg') }}"
         alt=""
       />
       {% else %}
@@ -45,7 +45,7 @@
       {% endif %} {% if thumbnails and thumbnails[1] %}
       <img
         class="w-1/4 object-cover"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], thumbnails[1])|resize('128x96', format='jpg') }}"
+        src="{{ ('images/original/'+thumbnails[1])|resize('128x96', format='jpg') }}"
         alt=""
       />
       {% else %}
@@ -57,7 +57,7 @@
       {% endif %} {% if thumbnails and thumbnails[2] %}
       <img
         class="w-1/4 object-cover"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], thumbnails[2])|resize('128x96', format='jpg') }}"
+        src="{{ ('images/original/'+thumbnails[2])|resize('128x96', format='jpg') }}"
         alt=""
       />
       {% else %}
@@ -69,7 +69,7 @@
       {% endif %} {% if thumbnails and thumbnails[3] %}
       <img
         class="w-1/4 object-cover"
-        src="{{ os.path.join(app.config['UPLOADED_PHOTOS_DEST'], thumbnails[3])|resize('128x96', format='jpg') }}"
+        src="{{ ('images/original/'+thumbnails[3])|resize('128x96', format='jpg') }}"
         alt=""
       />
       {% else %}
