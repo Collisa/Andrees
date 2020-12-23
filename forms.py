@@ -13,8 +13,14 @@ class UploadForm(FlaskForm):
   image = FileField('', validators=[Regexp('^\\[^/\\]\.jpg$')]) # regexp doesn't work, everything is okay 
   description = TextAreaField('Omschrijving')
   theme = SelectField('Thema', choices=[])
-  position = RadioField('Position', choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
+  position = RadioField('Position', validators=[InputRequired()], choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
   submit = SubmitField('Upload')
+  
+  class Meta:
+    def render_field(self, field, render_kw):
+      if field.type == "_Option":
+        render_kw.setdefault("required", True)
+      return super().render_field(field, render_kw)
     
   
 class NewThemeForm(FlaskForm):
@@ -31,4 +37,10 @@ class EditForm(FlaskForm):
   theme = SelectField('Thema', choices=[])
   position = RadioField('Position', choices=['Thema: Cover', 'Thema: kleine foto', 'Geen geschikt formaat'])
   submit = SubmitField('Wijzig')
+  
+  class Meta:
+    def render_field(self, field, render_kw):
+      if field.type == "_Option":
+        render_kw.setdefault("required", True)
+      return super().render_field(field, render_kw)
      
