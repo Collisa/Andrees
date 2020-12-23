@@ -49,8 +49,17 @@ body %} {% block content %}
                 <td class="w-3/4 text-left pl-6">
                   <div class="flex flex-row justify-between items-center">
                     {{ item.filename }}
-                    <div class="h-4 pl-6">
-                      <button>
+                    <div x-data="{ open: false }" class="h-4 pl-6 relative">
+                      <div
+                        x-show="open"
+                        class="absolute bottom-6 text-sm font-extralight text-teal-700 w-56 right-0 text-right bg-teal-100 px-1 rounded"
+                      >
+                        Dit veldje kan niet gewijzigd worden!
+                      </div>
+                      <button
+                        x-on:mouseenter="open = true"
+                        x-on:mouseleave="open =  false"
+                      >
                         <svg
                           class="w-4 h-4 text-teal-500 transform hover:scale-110 hover:text-teal-800"
                           fill="none"
