@@ -148,11 +148,14 @@ def uploading():
                 )
   os.remove(os.path.join(tempfile.gettempdir(), filename))
   
+  theme = Theme.query.filter(Theme.theme_name == request.form['theme']).first()
+  
   new_file = Image(
     filename=filename,
     description=request.form['description'],
     theme=request.form['theme'],
-    position=request.form['position']
+    position=request.form['position'],
+    themes=theme,
   )
   
   db.session.add(new_file)
