@@ -6,3 +6,4 @@ run.ps1
 app.db
 /static/uploads
 .env
+.idea
